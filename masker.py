@@ -1,15 +1,38 @@
 import random
+from os import path
 
-with open('out.txt', 'r') as file:
-    data = file.read()
+def readFile(filename):
+    """
+    Reads a text file and returns its text content
+    """
+    with open(path.join('data', filename), 'r') as file:
+        text_content = file.read()
+    return text_content
 
-N 			= 	len(data)
-charlocs 	= 	[i for i, letter in enumerate(data) if letter != ' ']
-maskRatio   =   0.05  
-Nmask     	=   int(maskRatio*len(charlocs))
-picked 		= 	random.sample(charlocs, Nmask)
+def maskText(text, mask_ratio):
+    """
+    Masks given text content according to the mask ratio given
+    """
+    N 			= 	len(text)
+    charlocs 	= 	[i for i, letter in enumerate(text) if letter != ' ']
+    Nmask     	=   int(mask_ratio*len(charlocs))
+    picked 		= 	random.sample(charlocs, Nmask)
+    for pick in picked:
+        text = text[:pick] +' '+ text[pick+1:]
+    return text
 
-for pick in picked:
-	data = data[:pick] +' '+ data[pick+1:]
+def displayText(text,title):
+    print(('*'*25+'{}'+'*'*25).format(title))
+    print(text)
+    print('*'*60)
 
-print(data)
+
+if __name__ == "__main__":
+    mask_ratio   =   0.15  
+    text_content = readFile('algorithm_wikipedia.txt')
+    text_masked = maskText(text_content,mask_ratio)
+    print('\n\n')
+    displayText(text_content, 'Original Text')
+    print('\n\n')
+    displayText(text_masked, 'Masked Text')
+    
