@@ -9,3 +9,11 @@ The script *masker.py* reads a textfile from data folder and masks random charac
  **Usage**
 
     python masker.py
+
+ **2. Two Axis Plot**
+
+The script *overlappingCurves.py* plots two graphs on same figure using multiple axis. The axis scale of each graph need not be same.
+ 
+ **Usage**
+
+    python overlappingCurves.py
