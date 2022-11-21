@@ -1,44 +1,46 @@
-# import some non-ml libraries
-import pandas as pd
+# Import librarires
 import numpy as np
+from os import path
 import matplotlib.pyplot as plt
 
-# set values for clean data visualization
-labelsize 	= 12
-width 		= 5
-height 		= width / 1.618
+def main():
 
-plt.rc('font', family ='serif')
-plt.rc('text', usetex = True)
-plt.rc('xtick', labelsize = labelsize)
-plt.rc('ytick', labelsize = labelsize)
-plt.rc('axes', labelsize = labelsize)
+    # Set plotting parameters
+    labelsize   =   12
+    width       =   5
+    height      =   width / 1.618
 
-fig1, ax 	= plt.subplots()
-fig1.subplots_adjust(left=.16, bottom=.2, right=.99, top=.97)
+    plt.rc('font', family ='serif')
+    plt.rc('xtick', labelsize = labelsize)
+    plt.rc('ytick', labelsize = labelsize)
+    plt.rc('axes', labelsize = labelsize)
 
-# read the data
-data 		= 	pd.read_csv('Temp_Vs_Chirp.csv').sort_values(by=['Temperature'])
-x 			=	data['Temperature']
-y 			=	data['Chirps']
+    fig1, ax = plt.subplots()
+    fig1.subplots_adjust(left=.16, bottom=.2, right=.99, top=.97)
 
+    N = 10
+    x = np.arange(N)
+    y = x**3+2*x+2
 
-# do the ploynomial fits
-p0 = np.poly1d(np.polyfit(x, y, 0))
-p1 = np.poly1d(np.polyfit(x, y, 1))
-p2 = np.poly1d(np.polyfit(x, y, 2))
+    # Do the ploynomial fits
+    p0 = np.poly1d(np.polyfit(x, y, 0))
+    p1 = np.poly1d(np.polyfit(x, y, 1))
+    p2 = np.poly1d(np.polyfit(x, y, 2))
 
+    # Plot the raw data and approximation functions
+    plt.scatter(x, y, color ='k', label = 'raw data')
+    plt.plot(x,p0(x), color= 'm', label = 'order 0 fit') 
+    plt.plot(x,p1(x), color= 'g', label = 'order 1 fit', linestyle='--') 
+    plt.plot(x,p2(x), color= 'b', label = 'order 2 fit', linestyle=':') 
+    plt.xlabel('x')
+    plt.ylabel('f(x)')
+    plt.legend()
+    plt.show()
 
-# plot the raw data and approximation functions
-plt.scatter(x, y, color ='k', label = 'raw data')
-plt.plot(x,p0(x), color= 'm', label = '$16.65x^0$') 
-plt.plot(x,p1(x), color= 'g', label = '$0.21x-0.32$', linestyle='--') 
-plt.plot(x,p2(x), color= 'b', label = '$0.0089x^2- 1.22x+ 56.79$', linestyle=':') 
-plt.xlabel('Temperature in Fahrenheit')
-plt.ylabel('number of chirps/sec')
-plt.legend()
+    # Save the graph
+    fig1.set_size_inches(width, height)
+    plt.savefig(path.join('graphs', 'polyfit.jpeg'), dpi = 150)
+    plt.close()
 
-# save the graph
-fig1.set_size_inches(width, height)
-plt.savefig('polyfit.jpeg', dpi = 300)
-plt.close()
+if __name__ == "__main__":
+    main()
