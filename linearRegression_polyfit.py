@@ -23,13 +23,13 @@ def main():
     y = x**3+2*x+2
 
     # Do the ploynomial fits
-    p0 = np.poly1d(np.polyfit(x, y, 0))
+    poly_fit_0 = np.poly1d(np.polyfit(x, y, 0))
     p1 = np.poly1d(np.polyfit(x, y, 1))
     p2 = np.poly1d(np.polyfit(x, y, 2))
 
     # Plot the raw data and approximation functions
     plt.scatter(x, y, color ='k', label = 'raw data')
-    plt.plot(x,p0(x), color= 'm', label = 'order 0 fit') 
+    plt.plot(x,poly_fit_0(x), color= 'm', label = 'order 0 fit') 
     plt.plot(x,p1(x), color= 'g', label = 'order 1 fit', linestyle='--') 
     plt.plot(x,p2(x), color= 'b', label = 'order 2 fit', linestyle=':') 
     plt.xlabel('x')
