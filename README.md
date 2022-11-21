@@ -17,3 +17,11 @@ The script *overlappingCurves.py* plots two graphs on same figure using multiple
  **Usage**
 
     python overlappingCurves.py
+    
+ **3. Polynomial fit**
+
+The script *linearRegression_polyfit.py* does polynomial fit to a given data on various orders and plots the respective graphs.
+ 
+ **Usage**
+
+    python linearRegression_polyfit.py
