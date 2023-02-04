@@ -36,8 +36,9 @@ The script *linearRegression_polyfit.py* does polynomial fit to a given data on 
 **4. Python wrapper code**
 A python wrapper code to call a simple command line function.
 
+
  **Usage**
  
  ```console
- python run_cmds.py
+ python run_comds.py
  ```
